@@ -12,7 +12,7 @@ class Jobs(models.Model):
     date_start = models.DateTimeField(verbose_name='Fecha de inicio')
     date_end = models.DateTimeField(verbose_name='Fecha de termino')
     scheduled_date = models.DateTimeField(verbose_name='Fecha programada')
-    staff = models.ManyToManyField(Staff, on_delete=models.CASCADE, verbose_name='Personal')
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, verbose_name='Personal')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
