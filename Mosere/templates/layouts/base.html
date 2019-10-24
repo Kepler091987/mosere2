@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load staticfiles %}
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+        <!-- Fonts -->
+            <link href="{% static 'css/all.css' %}" rel="stylesheet">
+            <link href="{% static 'css/fontawesome.css' %}" rel="stylesheet">
+
+            <!-- Styles -->
+            <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+            <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+            <link href="{% static 'css/hover.css' %}" rel="stylesheet">
+            <link href="{% static 'css/board.css' %}" rel="stylesheet">
+            <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        {% block extracss %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="modal" data-target="#MenuModal">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">
+                <img class="ml-5" src="{% static '/images/logo.jpg' %}"  width="70" height="30" alt="logo">
+            </a>
+            <!--        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
+            <ul class="navbar-nav  navbar-expand px-3">
+                <li class="nav-item text-nowrap pr-3">
+                    <a class="nav-link" href="">
+                        <img class="img-responsive rounded-circle"  width="20" src="" alt="">
+
+                    </a>
+                </li>
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar mt-5">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link"  href="" >
+                                    <span class="fa fa-tachometer-alt"></span>
+                                    Inicio <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="collapse" href="#clients" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fa fa-users"></i>
+                                    Clientes
+                                </a>
+                                <div class="collapse bg-white" id="clients">
+                                    <ul class="nav flex-column ml-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Clients:clients.new' %}">
+                                                <span class="fa fa-edit"></span>
+                                                Nuevo
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Clients:clients.index' %}">
+                                                <span class="fa fa-list-alt"></span>
+                                                Lista
+                                            </a>
+                                        </li>
+{#                                        <li class="nav-item">#}
+{#                                            <a class="nav-link" href="">#}
+{#                                                <i class="fas fa-map-marker-alt"></i>#}
+{#                                                Agregar Dirección#}
+{#                                            </a>#}
+{#                                        </li>#}
+{#                                        <li class="nav-item">#}
+{#                                            <a class="nav-link" href="">#}
+{#                                                <i class="fas fa-table"></i>#}
+{#                                                Agregar Datos Fiscales#}
+{#                                            </a>#}
+{#                                        </li>#}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="collapse" href="#works" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fas fa-toolbox"></i>
+                                    Trabajos
+                                </a>
+                                <div class="collapse bg-white" id="works">
+                                    <ul class="nav flex-column ml-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Jobs:jobs.create' %}">
+                                                <span class="fa fa-edit"></span>
+                                                Nuevo
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Jobs:jobs.index' %}">
+                                                <span class="fa fa-list-alt"></span>
+                                                Lista
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="collapse" href="#business" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="far fa-building"></i>
+                                    Empresas
+                                </a>
+                                <div class="collapse bg-white" id="business">
+                                    <ul class="nav flex-column ml-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Business:business.create' %}">
+                                                <span class="fa fa-edit"></span>
+                                                Nuevo
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Business:business.index' %}">
+                                                <span class="fa fa-list-alt"></span>
+                                                Lista
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="collapse" href="#staff" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fas fa-hard-hat"></i>
+                                    Personal
+                                </a>
+                                <div class="collapse bg-white" id="staff">
+                                    <ul class="nav flex-column ml-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Staff:staff.create' %}">
+                                                <span class="fa fa-edit"></span>
+                                                Nuevo
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Staff:staff.index' %}">
+                                                <span class="fa fa-list-alt"></span>
+                                                Lista
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="collapse" href="#reports" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="far fa-clipboard"></i>
+                                    Reportes
+                                </a>
+                                <div class="collapse bg-white" id="reports">
+                                    <ul class="nav flex-column ml-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">
+                                                <span class="fa fa-edit"></span>
+                                                Nuevo
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">
+                                                <span class="fa fa-list-alt"></span>
+                                                Lista
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="collapse" href="#catalogs" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fa fa-list-alt"></i>
+                                    Catalogos
+                                </a>
+                                <div class="collapse bg-white" id="catalogs">
+                                    <ul class="nav flex-column ml-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">
+                                                <span class="fa fa-edit"></span>
+                                                Nuevo
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">
+                                                <span class="fa fa-list-alt"></span>
+                                                Lista
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <span class="fa fa-user-cog"></span>
+                                    Perfil
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+                    {% block body %}
+
+                    {% endblock %}
+
+                    <div class="container">
+                        <hr>
+                        <div class="row justify-content-between text-center">
+                            <div class="col-12 col-lg-6 text-lg-left">
+                                <p class="text-muted">Mosere  © Copyright . | Todos los derechos reservados</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    <script src="{% static '/js//jquery-3.4.1.js' %}"></script>
+    <script src="{% static '/js/popper.js' %}"></script>
+    <script src="{% static '/js/bootstrap.js' %}"></script>
+    {% block extrajs %}
+        {% endblock %}
+  </body>
+<html>

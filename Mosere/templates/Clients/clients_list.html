@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+{% block title%}Lista de Clientes {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Lista de Clientes</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Clients:clients.new' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-plus"></span>
+                Nuevo
+            </a>
+        </div>
+    </div>
+    <p class="h5 text-center">Clientes</p>
+    <div class="d-none d-lg-block">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Colonia</th>
+            <th>Ciudad</th>
+            <th>Estado</th>
+            <th colspan="6">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+                {% for address in addresses %}
+                <tr>
+                    <td>{{ address.client.id }}</td>
+                    <td>{{ address.client.name }} {{ address.client.first_name }} {{ address.client.last_name }}</td>
+{#                    <td>{{ address.client.id }}</td>#}
+                    <td>{{ address.street }} #{{ address.number }}</td>
+                    <td>{{ address.suburb }}</td>
+                    <td>{{ address.city }}</td>
+                    <td>{{ address.state }}</td>
+{#                    <td width="140px">#}
+{#                        <a href="{% url 'Clients:clients.create.datafiscal' address.client.id %}" class="btn btn-outline-success btn-sm">#}
+{#                            <i class="fas fa-table"></i>#}
+{#                            Datos Fiscales#}
+{#                        </a>#}
+{#                    </td>#}
+{#                    <td width="105px">#}
+{#                        <a href="{% url 'Clients:clients.create.customeraddress' address.client.id %}" class="btn btn-outline-success btn-sm">#}
+{#                            <i class="fas fa-map-marker-alt"></i>#}
+{#                            Dirección#}
+{#                        </a>#}
+{#                    </td>#}
+                    <td width="100px">
+                        <a href="{% url 'Clients:clients.detail' address.client.id %}" class="btn btn-sm btn-outline-info">
+                            <i class="fa fa-eye"></i>
+                            Ver más
+                        </a>
+                    </td>
+                    {% if user.is_staff %}
+                        <td width="85px">
+                            <a href="{% url 'Clients:clients.update' address.client.id %}" class="btn btn-sm btn-outline-warning">
+                                <i class="fa fa-edit"></i>
+                                Editar
+                            </a>
+                        </td>
+                        <td width="100px">
+                            <a href="{% url 'Clients:clients.delete' address.client.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash-alt"></i>
+                                Eliminar
+                            </a>
+                        </td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

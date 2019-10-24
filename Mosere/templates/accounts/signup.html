@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Regístrate{% endblock %}
+
+{% block body %}
+  <h2>Regístrate</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Regístrate</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Direccion de Clientes{% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Direccion de Clientes</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Clients:clients.index' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-list-alt"></span>
+                Lista
+            </a>
+        </div>
+    </div>
+    <h1>Cliente:
+        {% for cleint in client %}
+            {{ cleint.name }} {{ cleint.first_name }} {{ cleint.last_name }}
+        {% endfor %}
+    </h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="row">
+            <div class="col-12 col-lg-4"></div>
+            <div class="col-12 col-lg-4">
+                <button type="submit" class="btn btn-block btn-success">
+                    <i class="far fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+            <div class="col-12 col-lg-4"></div>
+        </div>
+    </form>
+{% endblock %}

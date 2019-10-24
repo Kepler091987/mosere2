@@ -1,0 +1,130 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Detalle del cliente  {{ object.name }} {{ object.first_name }} {{ object.last_name }} {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ object.name }} {{ object.first_name }} {{ object.last_name }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Clients:clients.create.customeraddress' client.id %}" class="btn btn-outline-secondary btn-sm mr-1">
+                <i class="fas fa-map-marker-alt"></i>
+                Agregar Dirección
+            </a>
+            <a href="{% url 'Clients:clients.create.datafiscal' client.id %}" class="btn btn-outline-secondary btn-sm mr-1">
+                <i class="fas fa-table"></i>
+                Agregar Datos Fiscales
+            </a>
+            <a href="{% url 'Clients:clients.create.phone' client.id %}" class="btn btn-outline-secondary btn-sm mr-1">
+                <i class="fas fa-phone"></i>
+                Agregar Telefono
+            </a>
+            <a href="{% url 'Clients:clients.create.phone' client.id %}" class="btn btn-outline-secondary btn-sm mr-1">
+                <i class="fas fa-at"></i>
+                Agregar Email
+            </a>
+            <a href="{% url 'Clients:clients.index' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-list-alt"></span>
+                Lista
+            </a>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h3><strong>Datos Personales</strong></h3>
+        </li>
+        <li class="list-group-item">
+            <strong>Nombre Completo:</strong>
+            {{ client.name }} {{ client.first_name }} {{ client.last_name }}
+        </li>
+        {% if not phones %}
+            <li class="list-group-item">
+                <strong>Sin Telefonos:</strong>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <strong>Telefonos:</strong>
+                {% for phone in phones %}
+                        {{ phone.phone }},
+                {% endfor %}
+            </li>
+        {% endif %}
+        {% if not emails %}
+            <li class="list-group-item">
+                <strong>Sin Correos</strong>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <strong>Correos</strong>
+                {% for email in emails %}
+                        {{ email.email }},
+                {% endfor %}
+            </li>
+        {% endif %}
+        {% if not customersAddress %}
+            <li class="list-group-item">
+                <h3><strong>Sin Dirección del Cliente</strong></h3>
+            </li>
+
+            {% else %}
+            <li class="list-group-item">
+                <h3><strong>Dirección del Cliente</strong></h3>
+            </li>
+            {% with i=1 %}
+            {% for address in customersAddress %}
+                <li class="list-group-item">
+                    <h5><strong>Direccion:</strong></h5>
+                </li>
+                <li class="list-group-item">
+                    <strong>Calle y numero: </strong>
+                    {{ address.street }} {{ address.number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Colonia: </strong>
+                    {{ address.suburb }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Ciudad: </strong>
+                    {{ address.city }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Estado: </strong>
+                    {{ address.state }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Codigo Postal: </strong>
+                    {{ address.code_postal }}
+                </li>
+            {% endfor %}
+            {% endwith %}
+        {% endif %}
+        {% if datafiscal %}
+            <li class="list-group-item">
+                <h3><strong>Datos Fiscales</strong></h3>
+            </li>
+            {% for fiscal in datafiscal %}
+                <li class="list-group-item">
+                    <strong>RFC: </strong>
+                    {{ fiscal.rfc }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Dirección: </strong>
+                    {{ fiscal.address }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Estado: </strong>
+                    {{ fiscal.state }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Codigo Postal: </strong>
+                    {{ fiscal.code_postal }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Telefono: </strong>
+                    {{ fiscal.phone }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Correo: </strong>
+                    {{ fiscal.email }}
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html' %}
+{% block title%}Lista de Trabajos {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Lista de Trabajos</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Jobs:jobs.create' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-plus"></span>
+                Nuevo
+            </a>
+        </div>
+    </div>
+    <p class="h5 text-center">Trabajos</p>
+    <div class="d-none d-lg-block">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Numero de Folio</th>
+            <th>Tiempo estimado</th>
+            <th>Fecha Programado</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Terminado</th>
+            <th>Personal Asignado</th>
+            <th colspan="2">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for jobs in object_list %}
+                <tr>
+            <td>{{ jobs.id }}</td>
+            <td>{{ jobs.number_folio }}</td>
+            <td>{{ jobs.time }}</td>
+            <td>{{ jobs.scheduled_date }}</td>
+            <td>{{ jobs.date_start }}</td>
+            <td>{{ jobs.date_end }}</td>
+            <td>{{ jobs.staff }}</td>
+            <td width="100px">
+                <a href="{% url 'Jobs:jobs.update' jobs.id %}" class="btn btn-sm btn-outline-warning">
+                    <i class="fa fa-edit"></i>
+                    Editar
+                </a>
+            </td>
+            <td width="100px">
+                <a href="{% url 'Jobs:jobs.delete' jobs.id %}" class="btn btn-sm btn-outline-danger">
+                    <i class="fa fa-trash-alt"></i>
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

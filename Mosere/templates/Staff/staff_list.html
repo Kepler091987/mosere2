@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html' %}
+{% block title%}Lista de Personal {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Lista de Personal</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Staff:staff.create' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-plus"></span>
+                Nuevo
+            </a>
+        </div>
+    </div>
+    <p class="h5 text-center">Personal</p>
+    <div class="d-none d-lg-block">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Fecha de Ingreso</th>
+            <th>Puesto</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th colspan="3">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for staff in object_list %}
+                <tr>
+                    <td>{{ staff.id }}</td>
+                    <td>{{ staff.user }}</td>
+                    <td>{{ staff.name }}</td>
+                    <td>{{ staff.entry_date }}</td>
+                    <td>
+                        {%  if staff.market_stall == 'INS' %}
+                            Instalador
+                        {% elif staff.market_stall == 'ING' %}
+                            Ingeniero
+                        {% elif staff.market_stall == 'ADM' %}
+                            Administrativo
+                        {% endif %}
+                    </td>
+                    <td>{{ staff.email }}</td>
+                    <td>{{ staff.phone }}</td>
+                    <td width="100px">
+                        <a href="{% url 'Staff:staff.detail' staff.id %}" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-eye"></i>
+                            Ver más
+                        </a>
+                    </td>
+                    {% if user.is_staff %}
+                        <td width="85px">
+                            <a href="{% url 'Staff:staff.update' staff.id %}" class="btn btn-sm btn-outline-warning">
+                                <i class="fa fa-edit"></i>
+                                Editar
+                            </a>
+                        </td>
+                        <td width="100px">
+                            <a href="{% url 'Staff:staff.delete' staff.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash-alt"></i>
+                                Eliminar
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{#    <nav aria-label="Page navigation example">#}
+{#        <ul class="pagination justify-content-center">#}
+{#            <li class="page-item disabled">#}
+{#            <a class="page-link" href="#" tabindex="-1">Anterior</a>#}
+{#            </li>#}
+{#            <li class="page-item"><a class="page-link" href="#">1</a></li>#}
+{#            <li class="page-item"><a class="page-link" href="#">2</a></li>#}
+{#            <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+{#            <li class="page-item">#}
+{#                <a class="page-link" href="#">Siguiente</a>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </nav>#}
+{% endblock %}

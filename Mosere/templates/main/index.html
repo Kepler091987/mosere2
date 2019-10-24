@@ -1,0 +1,90 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+{% block title %}Bienvenido a Mosere{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Tablero de Servicios</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a href="" class="btn btn-sm btn-outline-secondary"><span class="fa fa-users"></span> Conductores</a>
+                <a href="" class="btn btn-sm btn-outline-secondary"><span class="fa fa-taxi"></span> Unidades</a>
+            </div>
+            <a href="<?php echo constant('URL')?>/servicios" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-calendar-alt"></span>
+                Servicios
+            </a>
+        </div>
+    </div>
+
+
+    <h4>Servicios Por Mes</h4>
+    <canvas id="ServiciosXMes"></canvas>
+    <br>
+<!--    <h4>Gráfico de barras</h4>-->
+<!--    <canvas id="myChart1"></canvas>-->
+<!--    <br>-->
+    <h4>Comparacion de Servicios en el mes con usuarios y conductores</h4>
+    <canvas id="myChart2"></canvas>
+    <br>
+{% endblock %}
+{% block extrajs %}
+    <script src="{% static 'js/chart.js' %}"></script>
+    <script>
+        var ctx = document.getElementById('ServiciosXMes').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                datasets: [{
+                    label: 'Servicios Cumplidos',
+                    backgroundColor: '#008f39',
+                    borderColor: 'gray',
+                    data: [20, 35, 40, 15, 41, 53, 25, 39, 43, 38, 24, 38]
+                },{
+                    label: 'Servicios Pendientes',
+                    backgroundColor: '#42a5f5',
+                    borderColor: 'gray',
+                    data: [20, 35, 40, 15, 41, 53, 25, 39, 43, 38, 24, 38]
+                },{
+                    label: 'Servicios Eliminados',
+                    backgroundColor: '#CB3234',
+                    borderColor: 'yellow',
+                    data: [20, 35, 40, 15, 41, 53, 25, 39, 43, 38, 24, 38]
+                }
+                ]},
+            options: {responsive: true}
+        });
+        // var ctx1 = document.getElementById('myChart1').getContext('2d');
+        // var chart = new Chart(ctx1, {
+        //     type: 'line',
+        //     data: {
+        //         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        //         datasets: [{
+        //             label: 'Ganancias',
+        //             backgroundColor: '#42a5f5',
+        //             borderColor: 'gray',
+        //             data: [7, 8, 5, 2, 8, 10, 7,-7,4,9,-8,5]
+        //         }
+        //         ]},
+        //     options: {}
+        // });
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var chart = new Chart(ctx2, {
+            type: 'doughnut',
+            data:
+                {
+                    datasets: [{
+                        data: [2, 6, 4],
+                        backgroundColor: ['orange','aqua','violet'],
+                        label: 'Comparacion de servicios del mes con usuarios y conductores'
+                    }],
+                    labels: [
+                        'Servicios',
+                        'Usuarios',
+                        'Conductores'
+                    ]},
+            options: {}
+        });
+    </script>
+{% endblock %}

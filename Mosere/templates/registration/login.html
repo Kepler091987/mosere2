@@ -1,0 +1,64 @@
+{% extends 'layouts/baseAuth.html' %}
+{% block title %}Entrar{% endblock %}
+{% block container %}
+<!--<h2>Iniciar sesión</h2>-->
+
+<!--<form method="POST">-->
+
+<!--    {% csrf_token %}-->
+<!--    <button type="submit">Login</button>-->
+<!--</form>-->
+
+<!--<hr />-->
+<!--<a href="">Registrar usuario</a>-->
+    {% load staticfiles %}
+<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url({% static 'images/bg-01.jpg' %});">
+					<span class="login100-form-title-1">
+						Entrar
+					</span>
+				</div>
+
+				<form class="login100-form validate-form" method="POST">
+					{% csrf_token %}
+					<div class="wrap-input100 validate-input m-b-26" data-validate="El usuario es obligatorio">
+						<span class="label-input100">Usuario</span>
+<!--						{{ form.username }}-->
+						<input class="input100" type="text" id="username" name="username" placeholder="Ingresar Usuario">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "El contraseña es obligatorio">
+						<span class="label-input100">Contraseña</span>
+<!--						{{ form.password }}-->
+						<input class="input100" type="password" id="password" name="password" placeholder="Ingresar contrasaeña">
+						<span class="focus-input100"></span>
+					</div>
+					<div class="flex-sb-m w-full p-b-30">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Recordarme
+							</label>
+						</div>
+
+						<div>
+							<a href="" class="txt1">
+								¿Olvidaste tu contraseña?
+							</a>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+                            <i class="fas fa-sign-in"></i>
+							Entrar
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

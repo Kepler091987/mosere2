@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %}
+{% block title%}Lista de Empresas {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Lista de Empresas</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Business:business.create' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-plus"></span>
+                Nuevo
+            </a>
+        </div>
+    </div>
+    <p class="h5 text-center">Empresas</p>
+    <div class="d-none d-lg-block">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Razón Social</th>
+            <th>Domicilio</th>
+            <th>RFC</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th colspan="2">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for busine in object_list %}
+                <tr>
+            <td>{{ busine.id }}</td>
+            <td>{{ busine.business_name }}</td>
+            <td>{{ busine.address }}</td>
+            <td>{{ busine.RFC }}</td>
+            <td>{{ busine.email }}</td>
+            <td>{{ busine.phone }}</td>
+            <td width="100px">
+                <a href="{% url 'Business:business.update' busine.id %}" class="btn btn-sm btn-outline-warning">
+                    <i class="fa fa-edit"></i>
+                    Editar
+                </a>
+            </td>
+            <td width="100px">
+                <a href="{% url 'Business:business.delete' busine.id %}" class="btn btn-sm btn-outline-danger">
+                    <i class="fa fa-trash-alt"></i>
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

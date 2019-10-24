@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Detalle del Personal  {{ staff.name }} {{ staff.first_name }} {{ staff.last_name }} {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ staff.name }} {{ staff.first_name }} {{ staff.last_name }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'Staff:staff.index' %}" class="btn btn-sm btn-outline-secondary">
+                <span class="fa fa-list-alt"></span>
+                Lista
+            </a>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h3><strong>Datos Personales</strong></h3>
+        </li>
+        <li class="list-group-item">
+            <strong>Nombre Completo:</strong>
+            {{ staff.name }} {{ staff.first_name }} {{ staff.last_name }}
+        </li>
+        <li class="list-group-item">
+            <strong>Telefono:</strong>
+            {{ staff.phone }}
+        </li>
+        <li class="list-group-item">
+            <strong>Correo:</strong>
+            {{ staff.email }}
+        </li>
+        <li class="list-group-item">
+            <strong>Puesto:</strong>
+            {%  if staff.market_stall == 'INS' %}
+                Instalador
+            {% elif staff.market_stall == 'ING' %}
+                Ingeniero
+            {% elif staff.market_stall == 'ADM' %}
+                Administrativo
+            {% endif %}
+        </li>
+        <li class="list-group-item">
+            <strong>Fecha de ingreso:</strong>
+            {{ staff.entry_date }}
+        </li>
+    </ul>
+{% endblock %}
